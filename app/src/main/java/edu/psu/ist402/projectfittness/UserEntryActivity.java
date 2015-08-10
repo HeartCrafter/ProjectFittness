@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -25,14 +26,17 @@ public class UserEntryActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userentry);
 
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            setContentView(R.layout.activity_userentry);
+        } else {
+            setContentView(R.layout.activity_userentry_landscape);
+        }
         updateUserInfo();
-
     }
 
 
-    void updateUserInfo() {
+    protected void updateUserInfo() {
         user = new User();
         Exercise_DB db = new Exercise_DB(this);
         user = db.getUserInfo();
@@ -40,6 +44,20 @@ public class UserEntryActivity extends Activity {
         addDatePickerOn((EditText) findViewById(R.id.editText_DOB));
 
         displayUserInfo();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            setContentView(R.layout.activity_userentry_landscape);
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            //setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            setContentView(R.layout.activity_userentry);
+        }
+        updateUserInfo();
     }
 
     private void addDatePickerOn(final EditText txtObj) {
@@ -200,6 +218,23 @@ public class UserEntryActivity extends Activity {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int day) {
             //blah
+        }
+
+        @Override
+        public void onPause() {
+            super.onPause();
+        }
+
+        @Override
+        public void onResume() {
+            super.onResume();
+            //updateUserInfo();
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            //updateUserInfo();
         }
     }
 }
