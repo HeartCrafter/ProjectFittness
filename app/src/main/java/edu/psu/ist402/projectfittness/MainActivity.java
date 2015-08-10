@@ -3,13 +3,8 @@ package edu.psu.ist402.projectfittness;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -19,20 +14,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> ls = new ArrayList<>();
-        ls.add("1");
-        ls.add("2");
-        ls.add("3");
-        ls.add("4");
-
-        ListView lv;
-
-
-        for (String l : ls) {
-            Log.d("Zunair", l);
-        }
-
-
         if (!userExists()) {
             Intent intent = new Intent(getApplicationContext(), UserEntryActivity.class);
             startActivity(intent);
@@ -41,8 +22,6 @@ public class MainActivity extends ActionBarActivity {
             Intent myIntent = new Intent(getApplicationContext(), UserSummaryActivity.class);
             startActivity(myIntent);
         }
-
-
     }
 
     // Check if a user exists
