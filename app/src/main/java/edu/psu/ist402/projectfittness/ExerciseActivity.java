@@ -275,6 +275,8 @@ public class ExerciseActivity extends ActionBarActivity implements TextToSpeech.
 
     public void startWorkout() {
 
+        Speak("Please, start the first set now.");
+
         ((Button) findViewById(R.id.btnAddWorkout)).setEnabled(false);
         startTime = System.currentTimeMillis() + (Integer.parseInt(selectedExerciseInfo.getSetLength()) * 1000);
         timerHandler = new Handler();
