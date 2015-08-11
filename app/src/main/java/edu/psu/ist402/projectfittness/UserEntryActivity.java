@@ -58,6 +58,7 @@ public class UserEntryActivity extends Activity {
             setContentView(R.layout.activity_userentry);
         }
         updateUserInfo();
+        displayUserInfo();
     }
 
     private void addDatePickerOn(final EditText txtObj) {
