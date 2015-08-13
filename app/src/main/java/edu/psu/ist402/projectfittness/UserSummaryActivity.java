@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -49,7 +50,13 @@ public class UserSummaryActivity extends AppCompatActivity {
 
 
         List<ExerciseProgress> exerciseProgress = db.getExerciseProgressList();
-
+        //exerciseHistoryHeader
+        //scrollViewHistory
+        if (exerciseProgress.size() != 0) {
+            //exerciseHistoryHeader
+            ((TableRow) findViewById(R.id.exerciseHistoryHeader)).setVisibility(View.VISIBLE);
+            ((ScrollView) findViewById(R.id.scrollViewHistory)).setVisibility(View.VISIBLE);
+        }
         for (ExerciseProgress eP : exerciseProgress) {
             // Create row
             TableRow tr = new TableRow(tLayout.getContext());

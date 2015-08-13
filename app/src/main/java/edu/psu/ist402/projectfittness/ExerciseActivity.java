@@ -147,8 +147,6 @@ public class ExerciseActivity extends ActionBarActivity implements TextToSpeech.
 
             endWorkout(true);
 
-
-            onNavigateUpFromChild(this);
         }
     }
 
@@ -206,13 +204,13 @@ public class ExerciseActivity extends ActionBarActivity implements TextToSpeech.
 
             if (timeLeft == 0) {
                 int t = Integer.parseInt(selectedExerciseInfo.getSetCount()) - 1;
-                currentExerciseProgress.setSets(currentExerciseProgress.getSets() + 1);
 
                 if (t == -1) {
 
                     exit = true;
                 } else {
                     if (!booWaiting) {
+
                         selectedExerciseInfo.setSetCount(String.valueOf(t));
                         startTime = System.currentTimeMillis() + (60 * 1000);
                         if (t == 1) {
@@ -227,6 +225,7 @@ public class ExerciseActivity extends ActionBarActivity implements TextToSpeech.
                                 Speak("You can wait another 60 seconds if you like.");
                             }
                         }
+                        currentExerciseProgress.setSets(currentExerciseProgress.getSets() + 1);
                         booWaiting = true;
                     } else {
                         startTime = System.currentTimeMillis() + ((Integer.parseInt(selectedExerciseInfo.getSetLength())) * 1000);
@@ -317,6 +316,8 @@ public class ExerciseActivity extends ActionBarActivity implements TextToSpeech.
                 currentExerciseProgress.getEnd_datetime(),
                 currentExerciseProgress.getSets(),
                 currentExerciseProgress.getExercise_id());
+
+        onNavigateUpFromChild(this);
     }
 
     private ExerciseInfo getSelectedExerciseInfoByName(String exerciseName) {
